@@ -9,7 +9,7 @@ private:
 public:
     MoveSystem(double dt) : delta_time{dt} {}
     
-    void operator()(up_EntityData & e);
+    void operator()(up_EntityDataStructure & e);
 };
 
 #endif

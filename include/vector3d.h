@@ -12,6 +12,13 @@ struct VecComp {
     std::unique_ptr<double[]> z{nullptr};
 };
 
+struct VecData {
+    bool has_comp;
+    double x;
+    double y;
+    double z;
+};
+
 struct IfaceVector3D{
     virtual inline double getX() = 0;
     virtual inline double getY() = 0;

@@ -8,7 +8,7 @@ export module game_register;
 
 export class GameRegister : public IfaceGameRegister {
 private:
-    up_EntityData e_data{nullptr}; 
+    up_EntityDataStructure e_data{nullptr}; 
     SystemList system_list;
 protected:
     void allocate_vector_component(VecComp & vc, unsigned int num_entities){
@@ -18,15 +18,16 @@ protected:
         vc.z = std::make_unique<double[]>(num_entities);
     }
 
-    up_EntityData allocate(unsigned int num_entities){
-        up_EntityData ed = std::make_unique<EntityData>();
+    up_EntityDataStructure allocate(unsigned int num_entities){
+        up_EntityDataStructure ed = std::make_unique<EntityDataStructure>();
         
         ed->num_entities = num_entities;
         ed->is_closed = false; 
 
         ed->is_active = std::make_unique<bool[]>(num_entities);
         
-        ed->accum = std::make_unique<double[]>(num_entities);
+        ed->accum_add = std::make_unique<double[]>(num_entities);
+        ed->accum_mul = std::make_unique<double[]>(num_entities);
         
         allocate_vector_component(ed->pos, num_entities);
         allocate_vector_component(ed->vel, num_entities);
@@ -35,12 +36,6 @@ protected:
         return std::move(ed);
     }
     
-    void initialize_vector_component(unsigned int i, VecComp & vc, up_IfaceVector3D & vec){
-        vc.x[i] = vec->getX();
-        vc.y[i] = vec->getY();
-        vc.z[i] = vec->getZ();
-        vc.has_comp[i] = true;
-    }
     
     void initialize_entities(EntityList & entity_list){
         for(int i = 0; i < e_data->num_entities; i++){
@@ -49,18 +44,22 @@ protected:
             e_data->vel.has_comp[i] = false;
             e_data->ang_vel.has_comp[i] = false;
             
-
-            if(entity_list[i].pos != nullptr){
-                initialize_vector_component(i, e_data->pos, entity_list[i].pos);
-            }  
-
-            if(entity_list[i].vel != nullptr){
-                initialize_vector_component(i, e_data->vel, entity_list[i].vel);
-            }
+            auto entity = entity_list[i]->getEntityData();
             
-            if(entity_list[i].ang_vel != nullptr){
-                initialize_vector_component(i, e_data->ang_vel, entity_list[i].ang_vel);
-            }
+            e_data->pos.has_comp[i] = entity->pos.has_comp;
+            e_data->pos.x[i] = entity->pos.x;
+            e_data->pos.y[i] = entity->pos.y;
+            e_data->pos.z[i] = entity->pos.z;
+            
+            e_data->vel.has_comp[i] = entity->vel.has_comp;
+            e_data->vel.x[i] = entity->vel.x;
+            e_data->vel.y[i] = entity->vel.y;
+            e_data->vel.z[i] = entity->vel.z;
+            
+            e_data->ang_vel.has_comp[i] = entity->ang_vel.has_comp;
+            e_data->ang_vel.x[i] = entity->ang_vel.x;
+            e_data->ang_vel.y[i] = entity->ang_vel.y;
+            e_data->ang_vel.z[i] = entity->ang_vel.z;
         }
     }
     
