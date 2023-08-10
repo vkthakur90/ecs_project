@@ -3,13 +3,6 @@
 
 #include <entity.h>
 
-class MoveSystem{
-private:
-    double delta_time;
-public:
-    MoveSystem(double dt) : delta_time{dt} {}
-    
-    void operator()(up_EntityDataStructure & e);
-};
+void move_system(up_EntityDataStructure & e);
 
 #endif
