@@ -13,10 +13,10 @@ struct VecComp {
 };
 
 struct VecData {
-    bool has_comp;
-    double x;
-    double y;
-    double z;
+    bool has_comp{false};
+    double x{0};
+    double y{0};
+    double z{0};
 };
 
 struct IfaceVector3D{

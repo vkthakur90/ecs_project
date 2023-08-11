@@ -15,6 +15,9 @@ typedef std::unique_ptr<EntityData> up_EntityData;
 
 struct IfaceEntity{
     virtual up_EntityData getEntityData() = 0;
+    virtual void setPosition(up_IfaceVector3D & val) = 0;
+    virtual void setVelocity(up_IfaceVector3D & val) = 0;
+    virtual void setAngularVelocity(up_IfaceVector3D & val) = 0;
 };
 
 typedef std::unique_ptr<IfaceEntity> up_IfaceEntity;

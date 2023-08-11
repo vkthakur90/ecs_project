@@ -8,9 +8,8 @@ import cartvector3d;
 import cylvector3d;
 import sphvector3d;
 import game_register;
+import entity;
     
-
-
 up_IfaceVector3D get_CylVector3D(double r, double theta, double z){
     return std::make_unique<CylVector3D>(r, theta, z);
 }
