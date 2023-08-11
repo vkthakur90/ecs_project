@@ -40,15 +40,15 @@ public:
     }
     
 protected:
-    void setPosition(up_IfaceVector3D & val){
+    inline void setPosition(up_IfaceVector3D & val){
         pos = std::move(val);
     }
     
-    void setVelocity(up_IfaceVector3D & val){
+    inline void setVelocity(up_IfaceVector3D & val){
         pos = std::move(val);
     }
     
-    void setAngularVelocity(up_IfaceVector3D & val){
+    inline void setAngularVelocity(up_IfaceVector3D & val){
         pos = std::move(val);
     }
     
@@ -57,5 +57,4 @@ private:
     up_IfaceVector3D vel{nullptr};
     up_IfaceVector3D ang_vel{nullptr};
     
-
 };
