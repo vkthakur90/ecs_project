@@ -3,6 +3,6 @@
 
 #include <entity.h>
 
-void move_system(up_EntityDataStructure & e);
+void move_system(up_EntityDataStructure & e, double delta_time);
 
 #endif

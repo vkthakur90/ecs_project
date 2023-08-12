@@ -2,8 +2,8 @@
 #include <entity.h>
 #include <system.h>
 
-void move_system(up_EntityDataStructure & e){
-    double delta_time = 0.1;
+void move_system(up_EntityDataStructure & e, double delta_time){
+    
     auto N = e->num_entities;
     
     #pragma omp parallel for

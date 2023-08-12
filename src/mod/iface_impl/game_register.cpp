@@ -6,7 +6,7 @@ module;
 
 export module game_register;
 
-export class GameRegister : public IfaceGameRegister {
+export class GameRegister final : public IfaceGameRegister {
 private:
     up_EntityDataStructure e_data{nullptr}; 
     SystemList system_list;
@@ -26,8 +26,8 @@ protected:
 
         ed->is_active = std::make_unique<bool[]>(num_entities);
         
-        ed->accum_add = std::make_unique<double[]>(num_entities);
-        ed->accum_mul = std::make_unique<double[]>(num_entities);
+        ed->accum.add = std::make_unique<double[]>(num_entities);
+        ed->accum.mul = std::make_unique<double[]>(num_entities);
         
         allocate_vector_component(ed->pos, num_entities);
         allocate_vector_component(ed->vel, num_entities);
@@ -36,30 +36,27 @@ protected:
         return std::move(ed);
     }
     
+    void initialize_vector_component(unsigned int i, VecComp & vc, up_IfaceVector3D & vec){
+        if(vec != nullptr){
+            vc.has_comp[i] = true;
+            vc.x[i] = vec->getX();
+            vc.y[i] = vec->getX();
+            vc.z[i] = vec->getX();
+        }else{
+            vc.has_comp[i] = false;
+        }
+    }
     
     void initialize_entities(EntityList & entity_list){
-        for(int i = 0; i < e_data->num_entities; i++){
+        for(unsigned int i = 0; i < e_data->num_entities; i++){
             e_data->is_active[i] = true;
             e_data->pos.has_comp[i] = false;
             e_data->vel.has_comp[i] = false;
             e_data->ang_vel.has_comp[i] = false;
             
-            auto entity = entity_list[i]->getEntityData();
-            
-            e_data->pos.has_comp[i] = entity->pos.has_comp;
-            e_data->pos.x[i] = entity->pos.x;
-            e_data->pos.y[i] = entity->pos.y;
-            e_data->pos.z[i] = entity->pos.z;
-            
-            e_data->vel.has_comp[i] = entity->vel.has_comp;
-            e_data->vel.x[i] = entity->vel.x;
-            e_data->vel.y[i] = entity->vel.y;
-            e_data->vel.z[i] = entity->vel.z;
-            
-            e_data->ang_vel.has_comp[i] = entity->ang_vel.has_comp;
-            e_data->ang_vel.x[i] = entity->ang_vel.x;
-            e_data->ang_vel.y[i] = entity->ang_vel.y;
-            e_data->ang_vel.z[i] = entity->ang_vel.z;
+            initialize_vector_component(i, e_data->pos, entity_list[i].pos);
+            initialize_vector_component(i, e_data->vel, entity_list[i].vel);
+            initialize_vector_component(i, e_data->ang_vel, entity_list[i].ang_vel);
         }
     }
     
@@ -77,8 +74,8 @@ public:
     }
 
     void update() override {
-        for(auto & s : system_list){
-            s(e_data);
+        for(auto & sys : system_list){
+            sys(e_data);
         }
     }    
     
