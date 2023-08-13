@@ -79,21 +79,21 @@ public:
         }
     }    
     
-    void displayState() override {
-        std::cout << '\n' << "ENTITIES : " << e_data->num_entities << "\n\n";
+    void displayState(std::ostream & out) override {
+        out << '\n' << "ENTITIES : " << e_data->num_entities << "\n\n";
         for(unsigned int i = 0; i < e_data->num_entities; i++){
-            std::cout << '\n' << "Entity ID : " << i << '\n';
+            out << '\n' << "Entity ID : " << i << '\n';
             
             if(e_data->pos.has_comp[i]){
-                std::cout << "Position : " << e_data->pos.x[i] << ' ' << e_data->pos.y[i] << ' ' << e_data->pos.z[i] << '\n'; 
+                out << "Position : " << e_data->pos.x[i] << ' ' << e_data->pos.y[i] << ' ' << e_data->pos.z[i] << '\n'; 
             }
             
             if(e_data->vel.has_comp[i]){
-                std::cout << "Velocity : " << e_data->vel.x[i] << ' ' << e_data->vel.y[i] << ' ' << e_data->vel.z[i] << '\n'; 
+                out << "Velocity : " << e_data->vel.x[i] << ' ' << e_data->vel.y[i] << ' ' << e_data->vel.z[i] << '\n'; 
             }
             
             if(e_data->ang_vel.has_comp[i]){
-                std::cout << "Angular Velocity : " << e_data->ang_vel.x[i] << ' ' << e_data->ang_vel.y[i] << ' ' << e_data->ang_vel.z[i] << '\n'; 
+                out << "Angular Velocity : " << e_data->ang_vel.x[i] << ' ' << e_data->ang_vel.y[i] << ' ' << e_data->ang_vel.z[i] << '\n'; 
             }
         }
     }

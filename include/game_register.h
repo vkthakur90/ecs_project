@@ -2,6 +2,7 @@
 #define __GAME_REGISTER_H__ 
 
 #include <entity.h>
+#include <iostream>
 #include <functional>
 
 struct EntityDataStructure{
@@ -24,7 +25,7 @@ typedef std::function<void(up_EntityDataStructure &)> system_fn;
 typedef std::vector<system_fn> SystemList;
 
 struct IfaceGameRegister{
-    virtual void displayState() = 0;
+    virtual void displayState(std::ostream & out) = 0;
     virtual void update() = 0;
 };
 
