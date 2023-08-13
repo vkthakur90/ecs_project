@@ -2,7 +2,7 @@ module;
 
 #include <iostream>
 #include <vector>
-#include <entity.h>
+#include <game_register.h>
 
 export module game_register;
 

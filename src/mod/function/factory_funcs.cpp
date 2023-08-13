@@ -3,6 +3,7 @@
 #include <cmath>
 #include <vector3d.h>
 #include <entity.h>
+#include <game_register.h>
 
 import cartvector3d;
 import cylvector3d;

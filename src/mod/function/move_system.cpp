@@ -2,8 +2,12 @@
 #include <entity.h>
 #include <system.h>
 
-void move_system(up_EntityDataStructure & e, double delta_time){
-    
+MoveSystem::MoveSystem(double dt){
+    delta_time = dt;
+}
+
+void MoveSystem::operator()(up_EntityDataStructure & e){
+
     auto N = e->num_entities;
     
     auto & has_pos = e->pos.has_comp;
