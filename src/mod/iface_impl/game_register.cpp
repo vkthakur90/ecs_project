@@ -40,8 +40,8 @@ protected:
         if(vec != nullptr){
             vc.has_comp[i] = true;
             vc.x[i] = vec->getX();
-            vc.y[i] = vec->getX();
-            vc.z[i] = vec->getX();
+            vc.y[i] = vec->getY();
+            vc.z[i] = vec->getZ();
         }else{
             vc.has_comp[i] = false;
         }
@@ -54,9 +54,9 @@ protected:
             e_data->vel.has_comp[i] = false;
             e_data->ang_vel.has_comp[i] = false;
             
-            initialize_vector_component(i, e_data->pos, entity_list[i].pos);
-            initialize_vector_component(i, e_data->vel, entity_list[i].vel);
-            initialize_vector_component(i, e_data->ang_vel, entity_list[i].ang_vel);
+            initialize_vector_component(i, e_data->pos, entity_list[i]->pos);
+            initialize_vector_component(i, e_data->vel, entity_list[i]->vel);
+            initialize_vector_component(i, e_data->ang_vel, entity_list[i]->ang_vel);
         }
     }
     
