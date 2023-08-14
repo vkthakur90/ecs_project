@@ -8,10 +8,10 @@
 int main(int argc, char** argv){
     EntityList el;
     
-    for(int i = 0; i < 180; i++){
+    for(int i = 0; i < 1800; i++){
         auto entt = std::make_unique<Entity>();
 
-        entt->pos = get_CylVector3D(1, 1*i, 0);
+        entt->pos = get_CylVector3D(1, 0.1*i, 0);
         entt->vel = get_CylVector3D(1, 1*i + 90, 0);
 
         el.push_back(std::move(entt));        
@@ -25,7 +25,7 @@ int main(int argc, char** argv){
     
     std::ofstream fout(argv[1]);
     
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 1000; i++){
         fout << "Begin iteration " << i << '\n';
         game->displayState(fout);
         game->update();

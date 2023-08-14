@@ -17,7 +17,5 @@ typedef std::vector<up_Entity> EntityList;
 typedef std::unique_ptr<bool[]> bool_arr;
 typedef std::unique_ptr<double[]> double_arr;
 
-
-
 #endif 
 

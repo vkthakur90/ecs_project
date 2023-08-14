@@ -26,3 +26,4 @@ up_IfaceVector3D get_CartVector3D(double x, double y, double z){
 up_IfaceGameRegister get_GameRegister(EntityList & el, SystemList & sl){
     return std::make_unique<GameRegister>(el, sl); 
 }
+

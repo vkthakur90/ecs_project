@@ -20,6 +20,12 @@ mkdir -p $LIB_DIR
 
 cd $OBJ_DIR
 
+for file in $MOD_DIR/iface_impl/components/*.cpp 
+do
+    echo "Compiling $file"
+    g++ -fPIC -std=c++23 -fopenmp -fmodules-ts -O3 -c $file -I$INCLUDE_PATH
+done
+
 for file in $MOD_DIR/iface_impl/*.cpp 
 do
     echo "Compiling $file"
@@ -38,10 +44,10 @@ do
     g++ -fPIC -std=c++23 -fopenmp -fmodules-ts  -O3 -c $file -I$INCLUDE_PATH
 done
 
-echo "Creating Library $LIB_DIR/libvector3d.a"
-ar -rcs $LIB_DIR/libvector3d.a $OBJ_DIR/*.o 
+echo "Creating Library $LIB_DIR/libecs.a"
+ar -rcs $LIB_DIR/libecs.a $OBJ_DIR/*.o 
 
 echo "Creating Executable $BIN_DIR/test.exe"
-g++ --std=c++23 -fopenmp -fmodules-ts $SRC_DIR/main.cpp -o $BIN_DIR/test.exe -I$INCLUDE_PATH -L$LIB_DIR -lvector3d -static 
+g++ --std=c++23 -fopenmp -fmodules-ts $SRC_DIR/main.cpp -o $BIN_DIR/test.exe -I$INCLUDE_PATH -L$LIB_DIR -lecs -static 
 
 cd $HOME_DIR  
