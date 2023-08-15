@@ -12,6 +12,5 @@ public:
     void operator()(up_EntityDataStructure & e) noexcept;
 };
 
-void move_system(up_EntityDataStructure & e, double delta_time);
 
 #endif

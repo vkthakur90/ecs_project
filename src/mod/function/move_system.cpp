@@ -18,9 +18,7 @@ void MoveSystem::operator()(up_EntityDataStructure & e) noexcept {
     
     #pragma omp parallel for
     for(int i = 0; i < N; i++){
-        if(has_pos[i] && has_vel[i]){
-            pos_x[i] += vel_x[i] * delta_time;
-        }
+        pos_x[i] += has_vel[i] ? vel_x[i] * delta_time : 0;
     }
     
     auto & pos_y = e->pos.y;
@@ -28,9 +26,7 @@ void MoveSystem::operator()(up_EntityDataStructure & e) noexcept {
     
     #pragma omp parallel for
     for(int i = 0; i < N; i++){
-        if(has_pos[i] && has_vel[i]){
-            pos_y[i] += vel_y[i] * delta_time;
-        }
+        pos_y[i] += has_vel[i] ? vel_y[i] * delta_time : 0;
     }
     
     auto & pos_z = e->pos.z;
@@ -38,8 +34,6 @@ void MoveSystem::operator()(up_EntityDataStructure & e) noexcept {
     
     #pragma omp parallel for
     for(int i = 0; i < N; i++){
-        if(has_pos[i] && has_vel[i]){
-            pos_z[i] += vel_z[i] * delta_time;
-        }
+        pos_z[i] += has_vel[i] ? vel_z[i] * delta_time : 0;
     }
 }
