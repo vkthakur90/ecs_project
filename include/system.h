@@ -9,7 +9,7 @@ private:
     double delta_time;
 public:
     MoveSystem(double dt);
-    void operator()(up_EntityDataStructure & e);
+    void operator()(up_EntityDataStructure & e) noexcept;
 };
 
 void move_system(up_EntityDataStructure & e, double delta_time);

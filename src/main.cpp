@@ -12,7 +12,7 @@ int main(int argc, char** argv){
         auto entt = std::make_unique<Entity>();
 
         entt->pos = get_CylVector3D(1, 0.1*i, 0);
-        entt->vel = get_CylVector3D(1, 1*i + 90, 0);
+        entt->vel = get_CylVector3D(1, (1*i + 90) % 360, 0);
 
         el.push_back(std::move(entt));        
     }

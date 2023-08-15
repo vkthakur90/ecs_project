@@ -6,7 +6,7 @@ MoveSystem::MoveSystem(double dt){
     delta_time = dt;
 }
 
-void MoveSystem::operator()(up_EntityDataStructure & e){
+void MoveSystem::operator()(up_EntityDataStructure & e) noexcept {
 
     auto N = e->num_entities;
     
